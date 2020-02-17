@@ -1,0 +1,2 @@
+# IoT_project_2k19-20
+Final Project for INTERNET OF THINGS BASED SMART SYSTEMS - UniCT
