@@ -7,6 +7,7 @@
 
 #A CSV file containig all the point to process is used as input
 
+import random 
 import pandas as pand
 import numpy as nump
 import matplotlib.pyplot as pyplt
@@ -24,12 +25,16 @@ class K_Means_Alg: 	#class K-Means_Alg define attributes and methods to perform 
 	def exe(self, data):   #exe method perform the algorithm
 
 		self.centroids = {} #initialize dictionary to save centroids coordinates
+		
+		#this solution select random centroids from the dataset
+		#for i in range(self.n):
+			#self.centroids[i] = data[(random.randint(0, len(data)))]      
 
 		for i in range(self.n):
-			self.centroids[i] = data[i] #initialize centroids matrix to the firsts elements in the data matrix
+			self.centroids[i] = data[i] #this solution select the firsts dataset elements as centroids
 
 		#iterations
-		for i in range(self.iterations):
+		for it in range(self.iterations):
 			self.clusters = {} #initialize clusters dictionary
 			for i in range(self.n):
 				self.clusters[i] = [] #initialize an array for every cluster(number of centroids -> n)
@@ -54,9 +59,13 @@ class K_Means_Alg: 	#class K-Means_Alg define attributes and methods to perform 
 
 				if nump.sum((curr - original_centroid)/original_centroid * 100.0) > self.approx_error: #verifying if current centroids have the same coordinates of previous centroids
 					end = False #if there is no variation from previous centroids (centroids don't change their positions more than approx_error), set end to false
-
 			if end:
+				print("Final iteration: "+str(it+1)) #this statement print the final iteration if the algorithm has converged before the max number of iterations
+				print("Algorithm has converged with approximation error of: " + str(self.approx_error))
 				break
+			if (it == (self.iterations-1)):
+				print("Final iteration: "+str(it+1)) #this statement print the final iteration if the algorithm reach the max number of iterations
+				print("Max iterations reached. Needs more iterations to converge")
 
 def main(path,n=3,approx_error=0.0000, iterations=500): #set arguments(n, approx_error, iterations) to default value if they're no passed
 	
@@ -70,17 +79,23 @@ def main(path,n=3,approx_error=0.0000, iterations=500): #set arguments(n, approx
 
 	# Plotting the results
 	print("Start Plotting..")
-	colors = 30*["b", "r", "g", "c", "m", "y", "k"] #every cluster has its color
+	colors = 30*["b", "r", "g", "c", "m", "y", "k", "#ff8300", "#777777", "#00ff04",  "#840028", "#45ff88", "#00146e", "#7d9300", "#ff6060", "#ffb600"] #every cluster has its color
+	subplt = pyplt.subplot() 
 
 	for centroid in km.centroids:
 		color = colors[centroid] #assign colors to centroid for plotting
-		pyplt.scatter(km.centroids[centroid][0], km.centroids[centroid][1], c = color , s = 80, marker= "X") #plot centroids
+		subplt.scatter(km.centroids[centroid][0], km.centroids[centroid][1], c = color , s = 80, marker= "X", label='Cluster '+str(centroid)) #plot centroids
 
 	for pointclass in km.clusters:
 		color = colors[pointclass] #assign colors to clusters for plotting
 		for point in km.clusters[pointclass]:
-			pyplt.scatter(point[0], point[1], color = color,s = 30, alpha= 0.4) #plot clusters
+			subplt.scatter(point[0], point[1], color = color,s = 30, alpha= 0.4) #plot clusters
+
+	chartBox = subplt.get_position()
+	subplt.set_position([chartBox.x0, chartBox.y0, chartBox.width*0.85, chartBox.height]) #set the new subplot position based on its original position
+	subplt.legend(loc="upper left", bbox_to_anchor=(1.0, 1.0), shadow=True) #add legend
+	pyplt.savefig('../output/cluster.png') #save a result png
 	pyplt.show()
 
 if __name__ == "__main__":
-	main(path='../dataset/k_means_clustering_test_1.csv', n=5) #set arguments for main function (path, n, approx_error, iterations)
+	main(path='../dataset/k_means_clustering_test_1.csv', n=15, approx_error=5, iterations=30) #set arguments for main function (path, n, approx_error, iterations)
