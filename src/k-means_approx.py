@@ -80,7 +80,8 @@ def main(path,n=3,approx_error=0.0000, iterations=500): #set arguments(n, approx
 	# Plotting the results
 	print("Start Plotting..")
 	colors = 30*["b", "r", "g", "c", "m", "y", "k", "#ff8300", "#777777", "#00ff04",  "#840028", "#45ff88", "#00146e", "#7d9300", "#ff6060", "#ffb600"] #every cluster has its color
-	subplt = pyplt.subplot() 
+	subplt = pyplt.subplot()
+	pyplt.title('K-Means Clusters Results') 
 
 	for centroid in km.centroids:
 		color = colors[centroid] #assign colors to centroid for plotting
@@ -98,4 +99,4 @@ def main(path,n=3,approx_error=0.0000, iterations=500): #set arguments(n, approx
 	pyplt.show()
 
 if __name__ == "__main__":
-	main(path='../dataset/k_means_clustering_test_1.csv', n=15, approx_error=5, iterations=30) #set arguments for main function (path, n, approx_error, iterations)
+	main(path='../dataset/k_means_clustering_test_1.csv', n=15, approx_error=0, iterations=30) #set arguments for main function (path, n, approx_error, iterations)
