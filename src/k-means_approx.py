@@ -50,15 +50,15 @@ class K_Means_Alg: 	#class K-Means_Alg define attributes and methods to perform 
 			#average the cluster datapoints to re-calculate the centroids
 			for pointclass in self.clusters:
 				self.centroids[pointclass] = nump.average(self.clusters[pointclass], axis = 0) #centroids[] now contains the coordinates of the new recalculated centroids
-
+			
 			end = True #end is used to verify if the algorithm has converged
-
+			print("------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
 			print("\nIteration: " +str(it+1))
 			print("Normalized coordinates of new centroids:")
 			for centroid in self.centroids:
 				original_centroid = previous[centroid]
 				curr = self.centroids[centroid]
-				print (nump.linalg.norm(nump.sum((curr-original_centroid)/original_centroid)))
+				print(nump.linalg.norm(nump.sum((curr-original_centroid)/original_centroid)))
 
 				if nump.linalg.norm(nump.sum((curr - original_centroid)/original_centroid)) > self.approx_error: #verifying if current centroids have the same coordinates of previous centroids
 					end = False #if there is no variation from previous centroids (centroids don't change their positions more than approx_error), set end to false
@@ -86,6 +86,7 @@ def main(path,n=3,approx_error=0.0000, iterations=500): #set arguments(n, approx
 	subplt = pyplt.subplot()
 	pyplt.title('K-Means Clusters Results') 
 
+
 	for centroid in km.centroids:
 		color = colors[centroid] #assign colors to centroid for plotting
 		subplt.scatter(km.centroids[centroid][0], km.centroids[centroid][1], c = color , s = 80, marker= "X", label='Cluster '+str(centroid)) #plot centroids
@@ -102,4 +103,8 @@ def main(path,n=3,approx_error=0.0000, iterations=500): #set arguments(n, approx
 	pyplt.show()
 
 if __name__ == "__main__":
-	main(path='../dataset/k_means_clustering_test_1.csv', n=12, approx_error=0.00, iterations=50) #set arguments for main function (path, n, approx_error, iterations)
+	cluster_size = int(input("Enter the cluster size : "))
+	appr_factor = float(input("Enter the approximation factor 0 < appr_factor < 1 : "))
+	cicles = int(input("Enter the iteration number : "))
+	input_file = input("Enter input file name ( .csv ) : ")
+	main(path='../dataset/'+ input_file, n=cluster_size, approx_error=appr_factor, iterations=cicles) #set arguments for main function (path, n, approx_error, iterations)
