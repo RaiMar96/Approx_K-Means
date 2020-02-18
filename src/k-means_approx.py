@@ -53,11 +53,14 @@ class K_Means_Alg: 	#class K-Means_Alg define attributes and methods to perform 
 
 			end = True #end is used to verify if the algorithm has converged
 
+			print("\nIteration: " +str(it+1))
+			print("Normalized coordinates of new centroids:")
 			for centroid in self.centroids:
 				original_centroid = previous[centroid]
 				curr = self.centroids[centroid]
+				print (nump.linalg.norm(nump.sum((curr-original_centroid)/original_centroid)))
 
-				if nump.sum((curr - original_centroid)/original_centroid * 100.0) > self.approx_error: #verifying if current centroids have the same coordinates of previous centroids
+				if nump.linalg.norm(nump.sum((curr - original_centroid)/original_centroid)) > self.approx_error: #verifying if current centroids have the same coordinates of previous centroids
 					end = False #if there is no variation from previous centroids (centroids don't change their positions more than approx_error), set end to false
 			if end:
 				print("Final iteration: "+str(it+1)) #this statement print the final iteration if the algorithm has converged before the max number of iterations
@@ -99,4 +102,4 @@ def main(path,n=3,approx_error=0.0000, iterations=500): #set arguments(n, approx
 	pyplt.show()
 
 if __name__ == "__main__":
-	main(path='../dataset/k_means_clustering_test_1.csv', n=15, approx_error=0, iterations=30) #set arguments for main function (path, n, approx_error, iterations)
+	main(path='../dataset/k_means_clustering_test_1.csv', n=12, approx_error=0.00, iterations=50) #set arguments for main function (path, n, approx_error, iterations)
