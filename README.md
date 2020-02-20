@@ -24,9 +24,10 @@ pip3 install matplotlib
 
 ```
 ## Struttura Input File
-I dati di input per la computazione come detto in alto devono essere posizionati nella directory _dataset_ , tali dati devono essere forniti come file .csv  ( a scopo di test viene fornito il file _test_1.csv_ ). Tale file verrà fornito come parametro d'ingresso al momento dell'esecuzione dello script.
+I dati di input per la computazione come detto in alto devono essere posizionati nella directory _dataset_ , tali dati devono essere forniti come file .csv  ( a scopo di test vengono fotniti i file _test1.csv_, _test2.csv_ ). Tale file verrà fornito come parametro d'ingresso al momento dell'esecuzione dello script.
 
-Sia nel caso di file bi-dimensionale (come il file di test proposto) che di mono-dimensionale, il file deve presentare i seguenti header per le colonne : **V1** , **V2** .
+Nel caso di file bi-dimensionale (come il file di test proposto), il file deve presentare i seguenti header per le colonne : **V1** , **V2**
+Nel caso di file mono-dimensionale (come il file di test proposto), il file deve presentare i seguenti header per le colonne : **V1** 
 
 ## Avvio
 Per avviare il tool , lanciare da riga di comando i seguenti (valide sia per bash linux che poweshell windows) comandi all'interno della directory principale :
@@ -37,17 +38,17 @@ python3 k-means_approx.py
 
 ```
 A seguito di ciò il programma richiederà l'inserimento dei 3 seguenti valori :
-- **Enter cluster size :** , richiede di inserire un valore intero che rappresenta la dimensione del cluster.
-- **Enter approximation factor 0 < appr_factor < 1 :** , richiede di inserire un valore compreso tra 0 e 1 che rappresenta il fattore di approssimazione.
-- **Enter max iteration number :** , richede il valore massimo di iterazioni eseguite dall'algoritmo.
-- **Enter input file name ( .csv ) :** , richiede il nome del file.csv di input presente in dataset.
+- **Enter cluster size :** richiede di inserire un valore intero che rappresenta la dimensione del cluster.
+- **Enter approximation factor 0 < appr_factor < 1 :**richiede di inserire un valore compreso tra 0 e 1 che rappresenta il fattore di approssimazione.
+- **Enter max iteration number :** richede il valore massimo di iterazioni eseguite dall'algoritmo.
+- **Enter input file name ( .csv ) :** richiede il nome del file.csv di input presente in dataset.
 
 ## Esempio
 Esempio di Esecuzione con i seguenti parametri :
 - cluster size = **5**
 - approximation factor = **0.002**
 - max iter = **50**
-- input file = **test_1.csv**
+- input file = **test2.csv**
 
 il risultato dell'esecuzione è rappresentato dalla seguente immagine :
 
