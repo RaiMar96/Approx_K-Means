@@ -4,7 +4,7 @@
 
 Tesina finale relativa al corso : INTERNET OF THINGS BASED SMART SYSTEMS - UniCT.
 
-Questo Tool implementa il  [K-means clustering alogrith](https://en.wikipedia.org/wiki/K-means_clustering) , in versione precisa o approssimata. Il grado di approssimazione viene introdotta tramite i parametri forniti in ingresso allo script ( approx_factor , max_itartions ). Questo permette di implementare la tecnica di Approximate Computing di loop perforation.
+Questo Tool implementa il  [K-means clustering algorithm](https://en.wikipedia.org/wiki/K-means_clustering) , in versione precisa o approssimata. Il grado di approssimazione viene introdotta tramite i parametri forniti in ingresso allo script ( approx_factor , max_itartions ). Questo permette di implementare la tecnica di Approximate Computing di loop perforation.
 
 La struttura della repository è la seguente :
 
