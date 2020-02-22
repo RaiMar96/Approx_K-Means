@@ -8,6 +8,7 @@
 #A CSV file containig all the point to process is used as input
 
 import random
+import math
 from scipy.spatial import distance
 import csv
 import pandas as pand
@@ -91,6 +92,34 @@ def main():
 	
 	km = K_Means_Alg(cluster_size, appr_factor, cicles) #instantiate km of K_Means_Alg class
 	km.exe(np_data) # perform the algorithm
+
+	#store the compressed parameters as output (indexes and codebook) in a file.
+	#Readable output file to understand the output structure
+	countpoint = 0 #variable used to print the progressive points
+	f= open("../output/ReadableResults.csv", "w+") #create a csv file if not exists; rewrite the file if exists
+	f.write("Compression rate: %f\n\n" %(32/math.log(len(km.centroids), 2))) #printing a line for compression rate
+	f.write("Codebook: \n")
+	for z in range(len(km.centroids)):
+		str1 = ','.join(str(e) for e in km.centroids[z]) #str1 contains the coordinates of centroid km.centroids[z] converted in string
+		f.write("Centroid %d\t Index: %d\t\tValue: %s\n" %(z+1, z+1, str1)) #printing for each centroid the index and its coordinates
+	f.write("\nClusters: \n")
+	for z in range(len(km.clusters)):
+		for w in range(len(km.clusters[z])):
+			countpoint+=1
+			str2 = ','.join(str(e) for e in km.clusters[z][w]) #str2 contains the coordinates of point km.clusters[z][w] converted in string
+			f.write("Point %d \t Cluster index: %d\t\tValue: %s\n" %(countpoint ,z+1, str2)) #printing for each point in the cluster its cluster index and coordinates
+	f.close()
+
+	#True output file for the DNN. Same operations as the previous ones, without useless informations
+	f2= open("../output/results.csv", "w+")
+	for z in range(len(km.centroids)):
+		str1 = ','.join(str(e) for e in km.centroids[z])
+		f2.write("%d\t%s\n\n" %(z+1, str1))
+	for z in range(len(km.clusters)):
+		for w in range(len(km.clusters[z])):
+			f2.write("%d\n" %(z+1))
+	f2.close()
+
 
 	# Plotting the results
 	print("Start Plotting..")
