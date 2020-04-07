@@ -1,6 +1,7 @@
 # K-Means Clustering
 
-<!--![simulation result](https://archivio.unict.it/sites/default/files/images/orizzontale-grigio.png)-->
+[ENGLISH VERSION](https://github.com/RaiMar96/Approx_K-Means/blob/master/README_ENG.md)
+
 
 Tesina finale relativa al corso : INTERNET OF THINGS BASED SMART SYSTEMS - UniCT.
 
